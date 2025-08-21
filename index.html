@@ -13,6 +13,20 @@
     />
   </head>
   <body>
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+      <button class="close-menu" id="close-menu">
+        <img src="./images/close.svg" alt="Close menu" />
+      </button>
+      <nav class="mobile-nav">
+        <a href="#home" class="mobile-nav-link">Home</a>
+        <a href="#features" class="mobile-nav-link">Features</a>
+        <a href="#pricing" class="mobile-nav-link">Pricing</a>
+        <a href="#blog" class="mobile-nav-link">Blog</a>
+        <a href="#about" class="mobile-nav-link">About</a>
+      </nav>
+      <a href="#contact" class="mobile-contact-button">Contact Us</a>
+    </div>
     <div class="header">
       <header class="header-content">
         <a href="#logo" class="logo">
@@ -220,7 +234,7 @@
               <img src="./images/avatar2.png" />
             </div>
             <div class="testimonial-details">
-             <h3 class="testimonial-name">Rishav Jha</h3>
+              <h3 class="testimonial-name">Rishav Jha</h3>
               <p class="testimonial-desc">HOD of Math Department</p>
             </div>
           </div>
@@ -377,5 +391,52 @@
         © 2025 - Present Studyz. All rights reserved.
       </div>
     </div>
+    <script>
+      // Mobile menu functionality
+      const menuButton = document.querySelector(".menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const closeMenu = document.getElementById("close-menu");
+      const overlay = document.getElementById("overlay");
+
+      menuButton.addEventListener("click", () => {
+        mobileMenu.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+
+      function closeMobileMenu() {
+        mobileMenu.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      closeMenu.addEventListener("click", closeMobileMenu);
+      overlay.addEventListener("click", closeMobileMenu);
+
+      // Scroll animations
+      function revealElements() {
+        const elements = document.querySelectorAll(".reveal");
+
+        elements.forEach((element) => {
+          const windowHeight = window.innerHeight;
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+
+          if (elementTop < windowHeight - elementVisible) {
+            element.classList.add("active");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", revealElements);
+      // Initial call to check elements on page load
+      window.addEventListener("load", revealElements);
+
+      // Add reveal class to elements that should animate on scroll
+      document.querySelector(".company-container").classList.add("reveal");
+      document.querySelector(".feature-container").classList.add("reveal");
+      document.querySelector(".testimonial-container").classList.add("reveal");
+      document.querySelector(".newsletter-container").classList.add("reveal");
+    </script>
   </body>
 </html>
